@@ -34,7 +34,7 @@
         radial-gradient(circle at 10% 15%, #ffffffa0 0 20%, transparent 21%),
         radial-gradient(circle at 85% 12%, #ffffffb0 0 18%, transparent 19%),
         linear-gradient(160deg, var(--bg-1), var(--bg-2));
-      overflow-x: hidden;
+      overflow: hidden;
       position: relative;
     }
 
@@ -132,15 +132,19 @@
     .wrap {
       position: relative;
       z-index: 1;
-      width: min(980px, 94vw);
-      margin: 24px auto 40px;
-      padding: 22px;
+      width: min(980px, 96vw);
+      margin: 0 auto;
+      height: 100vh;
+      padding: 14px 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .hero {
       background: linear-gradient(120deg, var(--pink), var(--sky), var(--yellow));
       border-radius: 26px;
-      padding: 24px 20px;
+      padding: 14px 16px;
       box-shadow: var(--shadow);
       text-align: center;
       animation: popIn 0.7s ease;
@@ -149,66 +153,113 @@
     h1 {
       margin: 0;
       font-family: 'ZCOOL KuaiLe', 'Baloo 2', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      letter-spacing: 2px;
+      font-size: clamp(1.45rem, 4.2vw, 2.2rem);
+      letter-spacing: 1px;
+    }
+
+    .week-badge {
+      margin: 8px auto 0;
+      width: fit-content;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #ffffffd8;
+      font-size: clamp(0.96rem, 2.6vw, 1.1rem);
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(67, 93, 128, 0.14);
+    }
+
+    .date-line {
+      margin-top: 10px;
+      font-size: clamp(1.25rem, 4.4vw, 1.9rem);
+      font-weight: 700;
+      text-shadow: 0 2px 0 #ffffff80;
     }
 
     .subtitle {
-      margin: 8px 0 0;
-      font-size: clamp(1rem, 3vw, 1.25rem);
-    }
-
-    .day-tabs {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .day-btn {
-      border: 0;
-      background: #fff;
-      color: var(--text);
-      padding: 12px 8px;
-      font: inherit;
-      border-radius: 16px;
-      cursor: pointer;
-      box-shadow: 0 5px 14px rgba(67, 93, 128, 0.15);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
-      font-weight: 700;
-    }
-
-    .day-btn:hover,
-    .day-btn:focus-visible {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 18px rgba(67, 93, 128, 0.2);
-      outline: none;
-    }
-
-    .day-btn.active {
-      background: linear-gradient(120deg, #ffedf4, #eaf8ff);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(67, 93, 128, 0.22);
+      margin: 6px 0 0;
+      font-size: clamp(0.9rem, 2.8vw, 1.08rem);
     }
 
     .panel {
-      margin-top: 22px;
+      flex: 1;
+      min-height: 0;
       background: var(--card);
       backdrop-filter: blur(4px);
       border-radius: 24px;
-      padding: 20px;
+      padding: 16px;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      touch-action: pan-y;
     }
 
-    .panel h2 {
-      margin: 0 0 14px;
-      font-size: clamp(1.2rem, 3.4vw, 1.7rem);
+    .day-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .nav-btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font: inherit;
+      font-weight: 700;
+      color: var(--text);
+      background: #fff;
+      box-shadow: 0 5px 14px rgba(67, 93, 128, 0.15);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-btn:active {
+      transform: scale(0.96);
+    }
+
+    .day-title {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(1.4rem, 4.2vw, 2rem);
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .slide-wrap {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #ffffffb8;
+      padding: 14px;
+    }
+
+    .slide-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-content.slide-next {
+      animation: slideFromRight 0.42s ease;
+    }
+
+    .slide-content.slide-prev {
+      animation: slideFromLeft 0.42s ease;
     }
 
     .class-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      align-content: start;
+      flex: 1;
     }
 
     .class-card {
@@ -218,12 +269,12 @@
       place-items: center;
       text-align: center;
       padding: 10px 8px;
-      font-size: 1.06rem;
+      font-size: 1.05rem;
       font-weight: 700;
       box-shadow: 0 8px 12px rgba(78, 94, 116, 0.14);
       transform: translateY(14px);
       opacity: 0;
-      animation: riseIn 0.5s ease forwards;
+      animation: riseIn 0.45s ease forwards;
     }
 
     .class-card:nth-child(1) { animation-delay: 0.02s; }
@@ -238,10 +289,25 @@
     .c4 { background: #cef6e2; }
     .c5 { background: #d7ebff; }
 
+    .empty {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #5c6790;
+      background: linear-gradient(160deg, #ffffffd4, #eef7ffb0);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
     .tip {
-      margin-top: 14px;
-      font-size: 0.98rem;
-      opacity: 0.85;
+      margin-top: 10px;
+      margin-bottom: 0;
+      font-size: 0.94rem;
+      text-align: center;
+      opacity: 0.86;
     }
 
     @keyframes drift {
@@ -263,21 +329,45 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
+    @keyframes slideFromRight {
+      from { transform: translateX(26px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideFromLeft {
+      from { transform: translateX(-26px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
     @media (max-width: 760px) {
-      .wrap { margin-top: 14px; padding: 12px; }
-      .hero { border-radius: 22px; }
-      .day-tabs {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .wrap {
+        width: 100vw;
+        padding: 10px;
+        gap: 10px;
       }
-      .day-btn:last-child {
-        grid-column: 1 / -1;
+
+      .hero {
+        border-radius: 20px;
+        padding: 12px 10px;
       }
+
+      .panel {
+        border-radius: 20px;
+        padding: 10px;
+      }
+
+      .slide-wrap {
+        padding: 10px;
+      }
+
       .class-list {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
       }
-      .class-card:last-child {
-        grid-column: 1 / -1;
+
+      .class-card {
+        min-height: 80px;
       }
+
       .rainbow {
         width: 160px;
         height: 82px;
@@ -298,61 +388,148 @@
   <main class="wrap">
     <section class="hero">
       <h1>🌈 三年二班课程表</h1>
-      <p class="subtitle">点击星期，看看今天有哪些有趣课程吧！</p>
-      <div class="day-tabs" id="dayTabs"></div>
+      <div class="week-badge" id="weekBadge">第1周 · 单周</div>
+      <div class="date-line" id="dateLine">2026年3月6日 · 星期五</div>
+      <p class="subtitle">左右滑动切换昨天/明天，看看今天的精彩课程！</p>
     </section>
 
-    <section class="panel" aria-live="polite">
-      <h2 id="dayTitle">星期一</h2>
-      <div class="class-list" id="classList"></div>
+    <section class="panel" aria-live="polite" id="swipeArea">
+      <div class="day-row">
+        <button type="button" class="nav-btn" id="prevBtn">⬅️ 昨天</button>
+        <h2 class="day-title" id="dayTitle">星期五</h2>
+        <button type="button" class="nav-btn" id="nextBtn">明天 ➡️</button>
+      </div>
+
+      <div class="slide-wrap">
+        <div class="slide-content" id="slideContent">
+          <ul class="class-list" id="classList"></ul>
+        </div>
+      </div>
+
       <p class="tip">小提示：每天都元气满满，开心学习！</p>
     </section>
   </main>
 
   <script>
     const schedule = {
-      '星期一': ['📚语文', '🔢数学', '🏃体育', '🔬科学', '🎵音乐'],
-      '星期二': ['🔢数学', '📚语文', '🗣️英语', '🎨美术', '🏃体育'],
-      '星期三': ['📚语文', '🔢数学', '📚语文', '🧩综合', '👨‍👩‍👧班会'],
-      '星期四': ['🗣️英语', '📚语文', '🔢数学', '🎨美术', '🔬科学'],
-      '星期五': ['🔢数学', '📚语文', '🗣️英语', '🏃体育', '👨‍👩‍👧家长课堂']
+      1: ['📚语文', '🔢数学', '🏃体育', '🔬科学', '🎵音乐'],
+      2: ['🔢数学', '📚语文', '🗣️英语', '🎨美术', '🏃体育'],
+      3: ['📚语文', '🔢数学', '📚语文', '🧩综合', '👨‍👩‍👧班会'],
+      4: ['🗣️英语', '📚语文', '🔢数学', '🎨美术', '🔬科学'],
+      5: ['🔢数学', '📚语文', '🗣️英语', '🏃体育', '👨‍👩‍👧家长课堂']
     };
 
-    const dayTabs = document.getElementById('dayTabs');
+    const dayNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];
+    const msPerDay = 24 * 60 * 60 * 1000;
+
+    const termStart = new Date('2025-09-01T00:00:00');
+    const currentDate = new Date('2026-03-06T00:00:00');
+
+    const weekBadge = document.getElementById('weekBadge');
+    const dateLine = document.getElementById('dateLine');
     const dayTitle = document.getElementById('dayTitle');
     const classList = document.getElementById('classList');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideContent = document.getElementById('slideContent');
+    const swipeArea = document.getElementById('swipeArea');
 
-    const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];
-    const days = Object.keys(schedule);
+    let viewingDate = normalizeDate(currentDate);
 
-    function render(day) {
-      dayTitle.textContent = day;
+    function normalizeDate(date) {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    function formatDate(date) {
+      const y = date.getFullYear();
+      const m = date.getMonth() + 1;
+      const d = date.getDate();
+      return `${y}年${m}月${d}日`;
+    }
+
+    function getWeekInfo(date) {
+      const diffDays = Math.floor((normalizeDate(date) - termStart) / msPerDay);
+      const week = Math.max(1, Math.floor(diffDays / 7) + 1);
+      return {
+        week,
+        oddEven: week % 2 === 1 ? '单周' : '双周'
+      };
+    }
+
+    function render() {
+      const weekday = viewingDate.getDay();
+      const dayName = dayNames[weekday];
+      const classes = schedule[weekday] || [];
+      const weekInfo = getWeekInfo(viewingDate);
+
+      dateLine.textContent = `${formatDate(viewingDate)} · ${dayName}`;
+      dayTitle.textContent = dayName;
+      weekBadge.textContent = `第${weekInfo.week}周 · ${weekInfo.oddEven}`;
       classList.innerHTML = '';
 
-      schedule[day].forEach((subject, i) => {
-        const card = document.createElement('article');
+      if (!classes.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.innerHTML = '🌈 今天是休息日<br>好好玩耍，也别忘了阅读哦！';
+        classList.replaceWith(empty);
+        const oldEmpty = slideContent.querySelector('.empty');
+        if (oldEmpty && oldEmpty !== empty) oldEmpty.remove();
+        return;
+      }
+
+      const oldEmpty = slideContent.querySelector('.empty');
+      if (oldEmpty) oldEmpty.remove();
+      if (!slideContent.contains(classList)) {
+        slideContent.prepend(classList);
+      }
+
+      classes.forEach((subject, i) => {
+        const card = document.createElement('li');
         card.className = `class-card ${colors[i % colors.length]}`;
         card.textContent = `第${i + 1}节 ${subject}`;
         classList.appendChild(card);
       });
-
-      [...dayTabs.children].forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.day === day);
-      });
     }
 
-    days.forEach((day, idx) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'day-btn';
-      btn.dataset.day = day;
-      btn.textContent = day;
-      btn.addEventListener('click', () => render(day));
-      dayTabs.appendChild(btn);
-      if (idx === 0) btn.classList.add('active');
-    });
+    function shiftDay(offset, directionClass) {
+      viewingDate = normalizeDate(new Date(viewingDate.getTime() + offset * msPerDay));
+      slideContent.classList.remove('slide-next', 'slide-prev');
+      render();
+      void slideContent.offsetWidth;
+      slideContent.classList.add(directionClass);
+    }
 
-    render(days[0]);
+    prevBtn.addEventListener('click', () => shiftDay(-1, 'slide-prev'));
+    nextBtn.addEventListener('click', () => shiftDay(1, 'slide-next'));
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    swipeArea.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+
+    swipeArea.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+      const minSwipe = 50;
+
+      if (Math.abs(dx) > minSwipe && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        if (dx < 0) {
+          shiftDay(1, 'slide-next');
+        } else {
+          shiftDay(-1, 'slide-prev');
+        }
+      }
+    }, { passive: true });
+
+    render();
   </script>
 </body>
 </html>
